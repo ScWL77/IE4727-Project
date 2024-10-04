@@ -8,7 +8,7 @@ Partner:
 ## Golden Gate Cinema
 
 ## Overview
-GGC Booking System is a one-stop platform for moviegoers to browse and purchase tickets for their movies. The platform streamlines the booking process by: 
+Golden Gate Cinema (GGC) Booking System is a one-stop platform for moviegoers to browse and purchase tickets for their movies. The platform streamlines the booking process by: 
 
 - Letting users to filter showtimes by date, movie and outlet, enabling them to find their desired slot easily. 
 - Allowing users to checkout tickets for multiple movies at once instead of having them to re-selecting their payment method for every timeslot. 
