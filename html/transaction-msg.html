@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login/Signup</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <header>
+            <img class="logo" src="../assets/logo.png" alt="logo">
+            <nav>
+                <ul class="nav_links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Showtimes</a></li>
+                    <li><a href="#">Cinemas</a></li>
+                </ul>
+            </nav>
+            <div class="logo-right">
+                <a class="cart" href="#"><img class="side-logo" src="../assets/cart-logo.png" alt="cart-logo"></a>
+                <a class="user" href="#"><img class="side-logo" src="../assets/user-logo.png" alt="user-logo"></a>
+            </div>
+        </header>
+        <div class="container">
+            <div class="msg-box">
+                <div class="icon-container">
+                    <i class="fa fa-check-circle-o check"></i>
+                    <!--<i class="fa fa-exclamation-circle"></i>-->
+                </div>
+                <div class="msg-container">
+                    <b>Payment Successful!</b>
+                    <!--<b>Payment Error!-->
+                </div>
+                <div class="subMsg-container">
+                    <p id="subMsg">Your transaction summary has been <br> send to user's email</p>
+                    <!--<p id="subMsg">There are clashes in timing with your previous bookings. <br> Please try again!</p>-->
+                </div>
+                <div class="next-button">
+                    <button type="submit">Back to Home</button>
+                    <!--<button type="submit">Back to Bookings</button>-->
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="row">
+                <div class="col">
+                    <img src="../assets/logo.png" class="footer-logo">
+                    <p>Golden Gate Cinema is a premier entertainment destination that offers a captivating movie-going experience with a blend of luxury, comfort, and the latest in cinematic technology.</p>
+                </div>
+                <div class="col">
+                    <h3 class="subheading1">Supported Payments</h3>
+                    <img src="../assets/visa.png" class="payment-logo">
+                    <img src="../assets/paylah.png" class="payment-logo">
+                    <img src="../assets/paynow.png" class="payment-logo-paynow">
+
+                    <h3 class="subheading2">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Movies</a></li>
+                        <li><a href="#">Showtimes</a></li>
+                        <li><a href="#">Cinemas</a></li>
+                        <li><a href="#">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Newsletter</h3>
+                    <form class="emailForm">
+                        <input type="email" placeholder="Enter your email " required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy;Copyright 2024 Golden Gate Cinema. All Rights Reserved</p>
+        </footer>
+        <script type="text/javascript" src="../scripts/login-register.js"></script>
+    </body>
+</html>
