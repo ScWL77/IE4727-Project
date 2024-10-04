@@ -3,4 +3,4 @@
 Welcome to our repository! This is a collaborative effort of both me and partner. Below you'll find information of other collaborators.
 
 Partner:
-- Cheong Xi Wen 
+- Cheong Xi Wen - [GitHub](https://github.com/xiwencheong)
