@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-html,body{
-    overflow-y:auto;
+html{
     height:100%;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    display: flex; /* This makes the body a flex container */
+    flex-direction: column; /* Sets the flex container to have a vertical column layout. */
+    min-height: 100vh; /* Ensures that the body takes up at least the full height of the viewport. */
+    box-sizing: inherit;
 }
 
 *{
@@ -12,8 +20,8 @@ html,body{
 }
 
 .logo{
-    width:10%;
-    height:50px;
+    width:15%;
+    height:40px;
 }
 
 .side-logo{
@@ -22,12 +30,50 @@ html,body{
     cursor: pointer;
 }
 
+.logout-logo{
+    width:25px;
+    height:25px;
+    cursor: pointer;
+    margin-left:15px;
+    margin-top:5px;
+}
+
+
 li,a{
     font-family: "Monstserrat", sans-serif;
     font-weight: 500;
     font-size: 16px;
     color: #24252A;
     text-decoration: none;
+}
+
+a{
+    position: relative;
+}
+
+a:after{
+    content: "";
+    position: absolute;
+    background-color: #B88A44;
+    height: 3px; 
+    width: 0; 
+    left: 0; 
+    bottom: -5px; 
+    transition: width 0.3s ease; 
+}
+
+
+#user:after, 
+#logout:after, 
+#cart:after,
+#delete:after,
+#no-underline:after {
+    width: 0; /* Disable the underline */
+    text-decoration: none;
+}
+
+a:hover:after {
+    width: 100%; 
 }
 
 header{
@@ -39,7 +85,7 @@ header{
     top:0;
     width:100%;
     background: white; 
-    z-index: 1000; /* Ensure it stays above other content */
+    z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -59,6 +105,7 @@ header{
 }
 
 .nav_links li{
+    position: relative;
     display:inline-block;
     padding:0px 20px;
 }
@@ -76,14 +123,14 @@ header{
 
 /*Form styling (login/signup)*/
 .container{
-    min-height: calc(100vh - 150px); /* Adjust based on footer height */
+    min-height: calc(100vh - 150px);
     background-color: white;
-    padding-bottom: 60px; /* Add padding to avoid content being hidden behind the footer */
+    padding-bottom: 60px;
 }
 
 .form-box{
     width:380px;
-    height:450px;
+    height:600px;
     position: relative;
     margin: 5% auto;
     background: white;
@@ -178,21 +225,13 @@ b{
 
 footer{
     width:100%;
-    position:relative;
-    bottom:0;
-    left: 0; 
+    margin-top:auto;
     background: #202020;
     color: white;
-    padding: 50px 0 30px;
+    padding: 30px 0 30px;
     font-size: 13px;
     line-height: 20px;
     font-family: "Monstserrat", sans-serif;
-    margin-top: -150px; /* Ensure it's above other content */
-}
-
-footer.visible {
-    position: fixed; /* Make it fixed when scrolled down */
-    bottom: 0;
 }
 
 .row{
@@ -227,12 +266,41 @@ footer.visible {
     margin-left:-15px;
 }
 
+.social-media-logo{
+    width:30px;
+    height:30px;
+    margin-right:20px;
+}
+
+.download-logo{
+    width:80px;
+    height:30px;
+    margin-right:20px;
+    margin-bottom:15px;
+}
+
+.download-logo-playstore{
+    width:90px;
+    height:45px;
+    margin-right:20px;
+    margin-bottom:7px;
+}
+
 .subheading1, .subheading2{
     margin-bottom:15px;
 }
 
 .subheading2{
     margin-top:15px;
+}
+
+.subheading3, .subheading4{
+    margin-bottom:20px;
+}
+
+.subheading4{
+    margin-top:30px;
+    margin-bottom: 10px;
 }
 
 .footer-links{
@@ -304,7 +372,7 @@ hr{
     padding: 10px;
     overflow:hidden;
     border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(32, 32, 32, 0.5); /* Here, 0.5 is the opacity */
+    box-shadow: 0 4px 8px rgba(32, 32, 32, 0.5); 
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -330,4 +398,541 @@ hr{
     cursor: pointer; 
     font-size: 16px; 
     border-radius: 4px;
+}
+
+/*Cart Page Content (styling)*/
+.page-header{
+    font-weight: 900;
+    font-size: 36px;
+}
+
+.cart-box, .seats-box {
+    width: 90%; 
+    margin: 30px auto 150px auto;
+    padding: 20px;
+    background-color: #ffffff; 
+}
+
+.cart-table, .payment-table , .seats-table{
+    width: 100%; 
+    margin: 20px 0; 
+    border-collapse: collapse; 
+    text-align: left;
+}
+
+.cart-table th, .cart-table td, .payment-table th, .payment-table td {
+    padding: 12px; 
+    text-align:left;
+}
+
+
+.cart-table th , .payment-table th{
+    background-color: #f1f1f1; 
+    font-weight: bold;
+    text-align: left; 
+}
+
+
+.cart-table tfoot td{
+    font-weight: bold;
+    background-color: #f1f1f1;
+    text-align: left; 
+    border-top:1px solid black;
+    padding-right: 20px; 
+}
+
+#error-msg{
+    color:red;
+}
+
+.button-container {
+    text-align: right;
+}
+
+.button-container button, .button-container-seats button{
+    background: #B88A44;
+    color: white;
+    border: none; 
+    padding: 10px;
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-top:15px;
+    border-radius: 5px;
+}
+
+/* .button-container-seats button{
+    background: white;
+    color: #B88A44;
+    border: none; 
+    padding: 10px;
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-top:15px;
+    border: 2px solid #B88A44;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-container-seats button.selected {
+    background: #B88A44;
+    color: white;        
+    transform: translateY(4px);
+} */
+
+.button-container-seats {
+    text-align: right;
+}
+
+/*Payment page content (styling) */
+
+.payment-table tfoot td{
+    font-weight: bold;
+    background-color: #ffffff;
+    text-align: left; 
+    border-top:1px solid black;
+    padding-right: 20px; 
+}
+
+.payment-options {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.payment-options input[type="radio"] {
+    margin-right: 15px; 
+}
+
+.payment-options label img{
+    margin-right: 150px;
+}
+
+/*Seat Selection page content (styling)*/
+
+.date-display, .venue-display {
+    border-bottom: 2px solid black; /* Same color as your buttons */
+    padding: 5px; /* Optional padding */
+    color: black; /* Text color */
+    font-size: 16px; /* Font size */
+    cursor: default; /* Change cursor to default as it's not clickable */
+}
+
+.button-container-seats{
+    text-align: left;
+}
+
+.button-container-seats button{
+    margin-right:30px;
+}
+
+.seats-table tfoot td{
+    font-weight: bold;
+    background-color: #f1f1f1;
+    text-align: center; 
+    padding-right: 20px; 
+}
+
+
+#wall{
+    text-align: left;
+    vertical-align: middle;
+    font-weight: bold; 
+    color: black;
+}
+
+#wall-align-left{
+    padding:10px;
+    text-align: left;
+    vertical-align: middle; 
+    font-weight: bold; 
+    color: black;
+}
+
+.clickable-square {
+    width: 50px; 
+    height: 50px; 
+    cursor: pointer; 
+    display: block; 
+}
+
+.available{
+    background-color: white;
+    border: 1px solid black;
+}
+
+.occupied{
+    background-color: #49454F;
+    border: 1px solid black;
+}
+
+.wheelchair{
+    background-color: blue;
+    border: 1px solid black;
+}
+
+.selected{
+    background-color: red;
+    border: 1px solid black;
+}
+
+.space{
+    width: 50px;
+    height: 50px; 
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: left; 
+}
+
+.span-text{
+    margin-left:5px;
+}
+
+.seats-table thead th, .seats-table tbody tr{
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+}
+
+.seats-table tbody td {
+    padding: 12px; 
+    text-align: left;
+}
+
+select {
+    border: none; 
+    border-bottom: 2px solid #79747E; 
+    outline: none; 
+    padding: 5px;
+    background-color: transparent; 
+    appearance: none; 
+    width: auto; 
+}
+
+select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="%2379747E" viewBox="0 0 16 16"><path d="M1.5 5.5l7 7 7-7H1.5z"/></svg>');
+    background-repeat: no-repeat; 
+    background-position: right 10px center;
+}
+
+/* #payment-button {
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    padding: 10px 20px;
+    background-color: #B88A44;
+    color: white;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-align: right;
+} */
+
+#payment-button img {
+    margin-left: 8px;
+    height: 20px; 
+    width: auto; 
+}
+
+.cart-button-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    display: block;
+    margin-top: 5px;
+}
+
+.seats-info-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 10px; 
+}
+
+#seat-info {
+    display: flex;
+    flex-direction: column; 
+    margin-right: auto; 
+}
+
+#payment-button {
+    display: flex; /* Enables flexbox layout for the button */
+    align-items: center; /* Vertically centers the text and image */
+    padding: 10px 20px;
+    background-color: #B88A44; /* Example button color */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+/* home page styling */
+
+/* Movie Card Styling */
+.movie-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the cards */
+    justify-content: flex-start; /* Align cards to the left */
+    max-width: 1200px; /* Set a max width for the container */
+    margin: auto; /* Center the container */
+}
+
+.movie-poster {
+    width: 100%; /* Makes the image fill the width of the card */
+    height: 100%; /* Allows the image to take up the full available height */
+    object-fit: contain; /* Ensures the image covers the area without distortion */
+}
+
+.movie-details {
+    padding: 10px;
+    flex-grow: 1; /* Ensures the details section grows to fill available space */
+}
+
+.movie-title {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.rating-icon {
+    width: 30px; /* Adjust size as needed */
+    height: auto;
+}
+
+/* Parent container for movie cards */
+.movie-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the cards */
+    justify-content: flex-start; /* Align cards to the left */
+    margin: auto; /* Center the container */
+    width: 100%; /* Ensure the container is fully responsive */
+}
+
+/* Styling for the individual movie card links */
+.movie-card-link {
+    display: block; /* Makes the entire card clickable */
+    text-decoration: none; /* Removes the underline */
+    width: calc(33.333% - 20px); /* 3 cards per row with spacing */
+    margin-bottom: 20px; /* Space between rows */
+}
+
+    /* Styling for the movie cards */
+    .movie-card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        height: 650px; /* Set a fixed height for the cards */
+    }
+
+/* Hover effect for cards */
+.movie-card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add a stronger shadow on hover */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .movie-card-link {
+        width: calc(50% - 20px); /* 2 cards per row on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-card-link {
+        width: 100%; /* 1 card per row on small screens */
+    }
+}
+
+
+/* movie description page styling */
+
+/* Container for aligning poster and details side-by-side */
+.movie-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Align the poster and details side-by-side */
+.movie-content {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Adds space between the poster and details */
+    width: 100%; /* Ensures the content fits the container */
+}
+
+/* Limit the size of the poster */
+.movie-info-poster {
+    width: 200px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain;
+}
+
+/* Movie details on the right */
+.movie-info-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow details to take the remaining space */
+}
+
+.details-row {
+    display: flex;
+    gap: 20px; /* Adds space between the two detail columns */
+}
+
+/* Each column styling */
+.details-column {
+    flex: 1; /* Make each column take up equal width */
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between title and classification icon */
+}
+
+.detail-label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.detail-text {
+    margin-bottom: 10px;
+}
+
+.classification {
+    width: 50px; /* Adjust as needed */
+    height: auto; /* Maintains aspect ratio */
+}
+
+/* Style for the button */
+#movie-desc-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #B88A44; /* Bootstrap primary blue */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#movie-desc-btn:hover {
+    background-color: #b37f32; /* Darker blue on hover */
+}
+
+
+/* showtimes page styling */
+
+/* Container for the entire movie card */
+
+.unique-movie-card {
+    display: flex;
+    flex-direction: row; /* Arrange contents in a row */
+    justify-content: flex-start; /* Spread out the contents */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 15px;
+    padding: 15px;
+    width: 100%; /* Ensure it stretches to the full width of the parent container */
+}
+
+
+.unique-left-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 10px; /* Space between details and showtimes */
+    width: 500px; /* Set to desired fixed width */
+}
+
+.unique-movie-poster {
+    max-width: 150px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.unique-description {
+    display: flex;
+    flex-direction: column;
+}
+
+.unique-right-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between each date section */
+    padding-left: 30px;
+}
+
+.unique-timeslot-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap onto new lines */
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.unique-showtime-button {
+    padding: 5px 10px;
+    background-color: #B88A44;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 0;
+    width: 150px;
+    text-align: center;
+}
+
+.unique-showtime-button:hover {
+    background-color: #b37f32;
+}
+
+.showtimes-display {
+    width: 100%; /* Make sure it takes up the full width of its parent container */
+    box-sizing: border-box; /* Include padding and borders in the element's width */
+}
+
+#filter-dropdown {
+    width: 200px;
+}
+
+/* outlets page */
+.outlet-row {
+    display: flex; /* Allows flexbox layout to arrange items in a row */
+    flex-wrap: wrap; /* Wraps the cards to a new row if space is insufficient */
+    gap: 20px; /* Adds space between the cards */
+}
+
+.outlet-card-link {
+    width: calc(50% - 10px); /* Sets each card to take up half of the container width */
+    box-sizing: border-box; /* Ensures padding and borders are included in width */
+}
+
+.outlet-card {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.outlet-photo {
+    width: 100%;  /* Makes the image fill the container */
+    height: auto;
+}
+
+.movie-details {
+    height: 500px;
 }
